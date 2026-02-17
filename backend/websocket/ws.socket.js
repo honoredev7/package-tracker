@@ -1,6 +1,5 @@
-import { WebSocketServer  } from "ws";
-import Delivery from "../models/delivery.model.js";
-import { updateDeliveryStatus } from "../services/delivery.service.js";
+import { WebSocketServer } from "ws";
+import { updateDeliveryLocation, updateDeliveryStatus } from "../services/delivery.service.js";
 import { wsEvents } from "../enums/websocket.enums.js";
 
 let wss;
@@ -13,12 +12,10 @@ const initWebSocket = (server) => {
 			const data = JSON.parse(message);
 
 			if (data.event === wsEvents.LOCATION_CHANGED) {
-				const delivery = await Delivery.findOne({
-					_id: data.delivery_id,
-				});
-
-				delivery.location = data.location;
-				await delivery.save();
+				const delivery = await updateDeliveryLocation(
+					data.delivery_id,
+					data.location
+				);
 
 				broadcast(wsEvents.DELIVERY_UPDATED, delivery);
 			}

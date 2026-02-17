@@ -15,9 +15,9 @@ const Login = () => {
 		setError("");
 
 		try {
-			await api.post("/api/auth/login", { email, password });
-	
-			const res = await api.get("/api/auth/check");
+			const res = await api.post("/api/auth/login", { email, password });
+			console.log(res.data)
+			
 			setUser(res.data);
 	
 			if (res.data.role === "admin") navigate("/admin");
@@ -32,7 +32,7 @@ const Login = () => {
 	};
 
 	return (
-		<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 px-4">
+		<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-600 to-emerald-700 px-4">
       
 			<div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
 				
@@ -76,14 +76,14 @@ const Login = () => {
 
 				<button
 					type="submit"
-					className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200"
+					className="w-full py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition duration-200"
 				>
 					Sign In
 				</button>
 				</form>
 
 				<p className="text-center text-sm text-gray-500 mt-6">
-				Package Tracker System
+					Package Tracker System
 				</p>
 			</div>
 

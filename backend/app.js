@@ -15,7 +15,10 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+	origin: process.env.FRONTEND_URL,
+	credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,15 +28,15 @@ app.use(
 
 		resave: false,
 		saveUninitialized: false,
-		rolling: true, // reset les 2h à chaque requête active
+		rolling: true,
 
 		store: MongoStore.create({
 			mongoUrl: process.env.MONGO_URI,
-			ttl: 60 * 60 * 2, // 2 heures en secondes
+			ttl: 60 * 60 * 2,
 		}),
 
 		cookie: {
-			maxAge: 1000 * 60 * 60 * 2, // 2 heures en millisecondes
+			maxAge: 1000 * 60 * 60 * 2,
 			httpOnly: true,
 			secure: process.env.NODE_ENV === "production" ? true : false,
 		},

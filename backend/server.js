@@ -6,12 +6,13 @@ import initWebSocket from "./websocket/ws.socket.js";
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
-    console.log("Connected to MongoDB");
-}).catch((err) => {
-    console.error("Failed to connect to MongoDB", err);
-    process.exit(1);
-});
+mongoose.connect(process.env.MONGO_URI)
+        .then(() => {
+            console.log("Connected to MongoDB");
+        }).catch((err) => {
+            console.error("Failed to connect to MongoDB", err);
+            process.exit(1);
+        });
 
 const PORT = process.env.PORT || 7000;
 const server = http.createServer(app);

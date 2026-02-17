@@ -5,23 +5,40 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
 	const [user, setUser] = useState(null);
-
-	const fetchUser = async () => {
-		try {
-			const res = await api.get("/api/auth/check");
-			setUser(res.data);
-		} catch (error) {
-			setUser(null);
-			console.error(error);
-		}
-	};
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		fetchUser();
+		const checkSession = async () => {
+			try {
+				const res = await api.get("/api/auth/check");
+				setUser(res.data);
+			} catch (error) {
+				setUser(null);
+				console.log(error)
+			} finally {
+				setLoading(false);
+			}
+		}
+
+		checkSession();
 	}, []);
 
+	const logout = async () => {
+		await api.post("/api/auth/logout");
+		setUser(null);
+		localStorage.removeItem("user");
+	};
+
+	if (loading) {
+		return (
+			<div className="min-h-screen flex items-center justify-center">
+				Loading...
+			</div>
+		);
+	}
+
 	return (
-		<AuthContext.Provider value={{ user, setUser }}>
+		<AuthContext.Provider value={{ user, setUser, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);

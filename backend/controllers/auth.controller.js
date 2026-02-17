@@ -21,13 +21,18 @@ export const register = async (req, res) => {
 		role,
 	});
 
-	res.status(HttpStatusCodes.CREATED).json(user);
+	res.status(HttpStatusCodes.CREATED).json({
+		id: user._id,
+		name: user.name,
+		email: user.email,
+		role: user.role,
+	});
 };
 
 export const login = async (req, res) => {
 	const { email, password } = req.body;
 
-	const user = await User.findOne({ email });
+	const user = await User.findOne({ email }).select("+password");
 
 	if (!user) return res.status(HttpStatusCodes.NOT_FOUND).json({ message: "User not found" });
 
@@ -40,7 +45,12 @@ export const login = async (req, res) => {
 		role: user.role,
 	};
 
-	res.status(HttpStatusCodes.OK).json({ message: "Logged in", user });
+	res.status(HttpStatusCodes.OK).json({
+		id: user._id,
+		name: user.name,
+		email: user.email,
+		role: user.role,
+	});
 }
 
 export const logout = (req, res) => {

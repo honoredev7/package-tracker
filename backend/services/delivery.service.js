@@ -1,8 +1,8 @@
 import { deliveryStatus } from "../enums/delivery.enums.js";
 import Delivery from "../models/delivery.model.js";
 
-export  const updateDeliveryStatus = async (delivery_id, newStatus) => {
-	const delivery = await Delivery.findOne({ _id: delivery_id });
+export const updateDeliveryStatus = async (deliveryId, newStatus) => {
+	const delivery = await Delivery.findOne({ _id: deliveryId });
 
 	if (!delivery) throw new Error("Delivery not found");
 
@@ -25,6 +25,17 @@ export  const updateDeliveryStatus = async (delivery_id, newStatus) => {
 
 	delivery.status = newStatus;
 
+	await delivery.save();
+
+	return delivery;
+}
+
+export const updateDeliveryLocation = async (deliveryId, location) => {
+	const delivery = await Delivery.findOne({ _id: deliveryId });
+
+	if (!delivery) throw new Error("Delivery not found");
+
+	delivery.location = location;
 	await delivery.save();
 
 	return delivery;
