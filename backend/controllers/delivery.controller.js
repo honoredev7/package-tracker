@@ -14,9 +14,11 @@ export const getDeliveries = async (req, res) => {
 
 export const getDeliveryById = async (req, res) => {
     try {
-        const delivery = await Delivery.findById(req.params.id).populate("package");
+        const delivery = await Delivery.findById(req.params.id);
 
-        res.status(HttpStatusCodes.OK).json(delivery);
+        return delivery
+            ? res.status(HttpStatusCodes.OK).json(delivery)
+            : res.status(HttpStatusCodes.NOT_FOUND).json({ message: "Delivery not found" });
     } catch (error) {
         res.status(HttpStatusCodes.SERVER_ERROR).json({ message: error.message });
     }

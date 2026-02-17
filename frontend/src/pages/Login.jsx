@@ -20,7 +20,7 @@ const Login = () => {
 			
 			setUser(res.data);
 	
-			if (res.data.role === "admin") navigate("/admin");
+			if (res.data.role === "admin") navigate("/admin/packages");
 			if (res.data.role === "driver") navigate("/driver");
 			if (res.data.role === "customer") navigate("/customer");
 			
@@ -69,7 +69,7 @@ const Login = () => {
 					type="password"
 					required
 					className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-					placeholder="••••••••"
+					placeholder="•••••••"
 					onChange={(e) => setPassword(e.target.value)}
 					/>
 				</div>

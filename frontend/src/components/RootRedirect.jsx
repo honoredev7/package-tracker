@@ -5,8 +5,6 @@ import AuthContext from "../contexts/AuthContext";
 const RootRedirect = () => {
 	const { user } = useContext(AuthContext);
 
-	console.log(user)
-
 	if (!user) {
 		return <Navigate to="/login" replace />;
 	}
