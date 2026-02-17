@@ -1,8 +1,17 @@
 import express from "express";
 import cors from "cors";
 
+import dotenv from "dotenv";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+
 import packageRoutes from "./routes/package.routes.js";
 import deliveryRoutes from "./routes/delivery.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+
+import { isAuthenticated } from "./middlewares/auth.middleware.js";
+
+dotenv.config();
 
 const app = express();
 
@@ -10,7 +19,29 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/package", packageRoutes);
-app.use("/api/delivery", deliveryRoutes);
+app.use(
+	session({
+		secret: "super-secret-key",
+
+		resave: false,
+		saveUninitialized: false,
+		rolling: true, // reset les 2h à chaque requête active
+
+		store: MongoStore.create({
+			mongoUrl: process.env.MONGO_URI,
+			ttl: 60 * 60 * 2, // 2 heures en secondes
+		}),
+
+		cookie: {
+			maxAge: 1000 * 60 * 60 * 2, // 2 heures en millisecondes
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production" ? true : false,
+		},
+	})
+);
+
+app.use("/api/auth", authRoutes);
+app.use("/api/package", isAuthenticated, packageRoutes);
+app.use("/api/delivery", isAuthenticated, deliveryRoutes);
 
 export default app;

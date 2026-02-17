@@ -5,7 +5,7 @@ const DeliverySchema = new mongoose.Schema({
 	package: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Package",
-		required: true,
+		required: [true, "Package is required"],
 	},
 	pickup_time: Date,
 	start_time: Date,
@@ -24,7 +24,7 @@ const DeliverySchema = new mongoose.Schema({
 DeliverySchema.index(
 	{ package: 1 },
 	{
-		unique: true,
+		unique: [true, "A delivery for this package already exists"],
 		partialFilterExpression: {
 			status: { $in: [deliveryStatus.OPEN, deliveryStatus.PICKED_UP, deliveryStatus.IN_TRANSIT] }
 		}

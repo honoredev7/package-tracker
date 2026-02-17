@@ -1,4 +1,5 @@
 import express from "express";
+import { createPackage, deletePackage, getPackageById, getPackages, updatePackage } from "../controllers/package.controller.js";
 
 const router = express.Router();
 

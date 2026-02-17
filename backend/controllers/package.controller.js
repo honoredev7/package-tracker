@@ -1,5 +1,5 @@
-import { HttpStatusCodes } from "../enums/http.enums";
-import Package from "../models/package.model";
+import { HttpStatusCodes } from "../enums/http.enums.js";
+import Package from "../models/package.model.js";
 
 export const getPackages = async (req, res) => {
     try {

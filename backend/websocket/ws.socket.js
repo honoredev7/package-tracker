@@ -1,4 +1,4 @@
-import WebSocket from "ws";
+import { WebSocketServer  } from "ws";
 import Delivery from "../models/delivery.model.js";
 import { updateDeliveryStatus } from "../services/delivery.service.js";
 import { wsEvents } from "../enums/websocket.enums.js";
@@ -6,7 +6,7 @@ import { wsEvents } from "../enums/websocket.enums.js";
 let wss;
 
 const initWebSocket = (server) => {
-	wss = new WebSocket.Server({ server });
+	wss = new WebSocketServer({ server });
 
 	wss.on("connection", (ws) => {
 		ws.on("message", async (message) => {
@@ -48,4 +48,4 @@ function broadcast(event, payload) {
 	});
 }
 
-module.exports = { initWebSocket };
+export default initWebSocket;
