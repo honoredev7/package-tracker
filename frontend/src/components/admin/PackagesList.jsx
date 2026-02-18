@@ -20,6 +20,7 @@ const PackagesList = () => {
 				<table className="w-full text-left">
 					<thead className="bg-gray-200">
 						<tr>
+							<th className="p-4">Package ID</th>
 							<th className="p-4">Description</th>
 							<th className="p-4">Weight</th>
 							<th className="p-4">From</th>
@@ -31,6 +32,7 @@ const PackagesList = () => {
 					<tbody>
 						{packages.map((pkg) => (
 							<tr key={pkg._id} className="border-t hover:bg-gray-50">
+								<td className="p-4">{pkg._id}</td>
 								<td className="p-4">{pkg.description}</td>
 								<td className="p-4">{pkg.weight} g</td>
 								<td className="p-4">{pkg.from_address}</td>
