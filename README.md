@@ -75,8 +75,8 @@ Roles available:
 ### 1️⃣ Clone the repository
 
 ``` bash
-git clone https://github.com/your-username/package-delivery-tracker.git
-cd package-delivery-tracker
+git clone https://github.com/honoredev7/package-tracker
+cd package-tracker
 ```
 
 ------------------------------------------------------------------------
@@ -98,10 +98,10 @@ npm install
 ### 📝 Create `.env` file
 
 ``` env
-PORT=5000
+PORT=7000
 MONGO_URI=mongodb://localhost:27017/package_tracker
-SESSION_SECRET=your_secret_key
-CLIENT_URL=http://localhost:5173
+NODE_ENV=development
+FRONTEND_URL=http://localhost:5173
 ```
 
 ### ▶️ Run the backend
@@ -112,7 +112,7 @@ npm run dev
 
 Server runs at:
 
-    http://localhost:5000
+    http://localhost:7000
 
 ------------------------------------------------------------------------
 
@@ -128,6 +128,13 @@ cd frontend
 
 ``` bash
 npm install
+```
+
+### 📝 Create `.env` file
+
+``` env
+VITE_API_BASE_URL=http://localhost:7000
+VITE_WEB_SOCKET_URL=ws://localhost:7000
 ```
 
 ### ▶️ Run the frontend
@@ -188,12 +195,14 @@ The system uses WebSocket for:
 
 # 📦 Environment Variables
 
-  Variable         Description
-  ---------------- -------------------------------
-  PORT             Backend server port
-  MONGO_URI        MongoDB connection string
-  SESSION_SECRET   Secret for session encryption
-  CLIENT_URL       Frontend origin for CORS
+  Variable                  Description
+  ----------------------    -------------------------------
+  PORT                      Backend server port
+  MONGO_URI                 MongoDB connection string
+  NODE_ENV                  Node Environnement
+  FRONTEND_URL              Frontend CORS Origin
+  VITE_API_BASE_URL         Backend BASE URL
+  VITE_WEB_SOCKET_URL       Backend Web Socket Url
 
 ------------------------------------------------------------------------
 

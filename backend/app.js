@@ -19,8 +19,14 @@ app.use(cors({
 	origin: process.env.FRONTEND_URL,
 	credentials: true
 }));
+
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+	res.json({ message: "Package Tracker API" });
+});
 
 app.use(
 	session({
@@ -48,3 +54,4 @@ app.use("/api/package", isAuthenticated, packageRoutes);
 app.use("/api/delivery", isAuthenticated, deliveryRoutes);
 
 export default app;
+

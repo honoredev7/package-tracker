@@ -19,7 +19,6 @@
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "mongoose": "^9.2.1",
-    "uuid": "^13.0.0",
     "ws": "^8.19.0"
   },
   "devDependencies": {
