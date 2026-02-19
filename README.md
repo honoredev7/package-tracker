@@ -11,6 +11,8 @@ authentification par session et tracking en temps réel.
 
 ------------------------------------------------------------------------
 
+<img width="1341" height="635" alt="package-tracker" src="https://github.com/user-attachments/assets/fd78baaa-5653-442c-b9b5-e94919a83021" />
+
 ## 📌 Overview
 
 Package Delivery Tracker est une application full-stack permettant :
