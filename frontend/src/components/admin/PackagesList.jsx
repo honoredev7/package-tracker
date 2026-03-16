@@ -6,7 +6,7 @@ const PackagesList = () => {
 
 	useEffect(() => {
 		const fetchPackages = async () => {
-			const res = await api.get("/api/package");
+			const res = await api.get("/api/package", { withCredentials: true });
 			setPackages(res.data);
 		};
 		fetchPackages();

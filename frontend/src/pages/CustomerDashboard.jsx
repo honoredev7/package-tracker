@@ -12,12 +12,13 @@ const CustomerDashboard = () => {
 
 	const handleSearch = async () => {
 		try {
-			const res = await api.get(`/api/package/${packageId}`);
+			const res = await api.get(`/api/package/${packageId}`, { withCredentials: true });
 			setPkg(res.data);
 
 			if (res.data.active_delivery_id) {
 				const deliveryRes = await api.get(
-					`/api/delivery/${res.data.active_delivery_id}`
+					`/api/delivery/${res.data.active_delivery_id}`,
+					{ withCredentials: true }
 				);
 
 				setDelivery(deliveryRes.data);

@@ -6,7 +6,7 @@ const DeliveriesList = () => {
 
 	useEffect(() => {
 		const fetchDeliveries = async () => {
-			const res = await api.get("/api/delivery");
+			const res = await api.get("/api/delivery", { withCredentials: true });
 			setDeliveries(res.data);
 		};
 		fetchDeliveries();

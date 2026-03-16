@@ -14,11 +14,12 @@ const DriverDashboard = () => {
 
 	const loadDelivery = async () => {
 		try {
-			const deliveryRes = await api.get(`/api/delivery/${deliveryId}`);
+			const deliveryRes = await api.get(`/api/delivery/${deliveryId}`, { withCredentials: true });
 			setDelivery(deliveryRes.data);
 
 			const packageRes = await api.get(
-				`/api/package/${deliveryRes.data.package}`
+				`/api/package/${deliveryRes.data.package}`,
+				{ withCredentials: true }
 			);
 
 			setPkg(packageRes.data);

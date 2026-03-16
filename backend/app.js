@@ -28,6 +28,8 @@ app.get("/", (req, res) => {
 	res.json({ message: "Package Tracker API" });
 });
 
+app.set("trust proxy", 1);
+
 app.use(
 	session({
 		secret: "super-secret-key",
@@ -44,7 +46,8 @@ app.use(
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 2,
 			httpOnly: true,
-			secure: process.env.NODE_ENV === "production" ? true : false,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
 		},
 	})
 );

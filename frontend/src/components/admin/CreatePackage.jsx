@@ -11,7 +11,7 @@ const CreatePackage = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await api.post("/api/package", form);
+		await api.post("/api/package", form, { withCredentials: true });
 		setSuccess("Package created successfully!");
 	};
 

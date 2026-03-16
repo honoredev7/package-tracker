@@ -37,12 +37,12 @@ const TrackerMap = ({ from, to, current }) => {
 
 				{/* Source */}
 				<Marker position={[from.lat, from.lng]}>
-				<Popup>Source</Popup>
+					<Popup>Source</Popup>
 				</Marker>
 
 				{/* Destination */}
 				<Marker position={[to.lat, to.lng]}>
-				<Popup>Destination</Popup>
+					<Popup>Destination</Popup>
 				</Marker>
 
 				{/* Current location */}

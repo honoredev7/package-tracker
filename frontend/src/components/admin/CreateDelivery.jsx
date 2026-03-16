@@ -8,7 +8,7 @@ const CreateDelivery = () => {
 
 	useEffect(() => {
 		const fetchPackages = async () => {
-			const res = await api.get("/api/package");
+			const res = await api.get("/api/package", { withCredentials: true });
 			setPackages(res.data);
 		};
 		fetchPackages();
@@ -19,7 +19,7 @@ const CreateDelivery = () => {
 
 		await api.post("/api/delivery", {
 			package: selectedPackage,
-		});
+		}, { withCredentials: true });
 
 		setSuccess("Delivery created successfully!");
 	};
