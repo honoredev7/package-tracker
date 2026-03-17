@@ -11,6 +11,7 @@ const CreatePackage = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		await api.post("/api/package", form, { withCredentials: true });
 		setSuccess("Package created successfully!");
 	};
@@ -35,31 +36,84 @@ const CreatePackage = () => {
 					required
 				/>
 
-				<input
-					name="weight"
-					placeholder="Weight (grams)"
-					type="number"
-					min={0}
-					className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-					onChange={handleChange}
-					required
-				/>
+				<div className="flex grid-cols-4 gap-4">
+					<input
+						name="weight"
+						placeholder="Weight (grams)"
+						type="number"
+						min={0}
+						className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+						onChange={handleChange}
+						required
+					/>
 
-				<input
-					name="from_address"
-					placeholder="From Address"
-					className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-					onChange={handleChange}
-					required
-				/>
+					<input
+						name="width"
+						placeholder="Width (cm)"
+						type="number"
+						min={0}
+						className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+						onChange={handleChange}
+						required
+					/>
 
-				<input
-					name="to_address"
-					placeholder="To Address"
-					className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
-					onChange={handleChange}
-					required
-				/>
+					<input
+						name="height"
+						placeholder="Height (cm)"
+						type="number"
+						min={0}
+						className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+						onChange={handleChange}
+						required
+					/>
+
+					<input
+						name="depth"
+						placeholder="Depth (cm)"
+						type="number"
+						min={0}
+						className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+						onChange={handleChange}
+						required
+					/>
+				</div>
+
+				<div className="flex grid-cols-2 gap-4">
+					<input
+						name="from_name"
+						placeholder="From Name"
+						className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+						onChange={handleChange}
+						required
+					/>
+
+					<input
+						name="from_address"
+						placeholder="From Address"
+						className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+						onChange={handleChange}
+						required
+					/>
+
+				</div>
+
+				<div className="flex grid-cols-2 gap-4">
+					<input
+						name="to_name"
+						placeholder="To Name"
+						className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+						onChange={handleChange}
+						required
+					/>
+
+					<input
+						name="to_address"
+						placeholder="To Address"
+						className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500"
+						onChange={handleChange}
+						required
+					/>
+				</div>
 
 				<button
 					type="submit"

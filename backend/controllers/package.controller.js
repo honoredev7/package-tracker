@@ -1,5 +1,6 @@
 import { HttpStatusCodes } from "../enums/http.enums.js";
 import Package from "../models/package.model.js";
+import { geocodeAddress } from "../services/geocoding.service.js";
 
 export const getPackages = async (req, res) => {
     try {
@@ -22,8 +23,13 @@ export const getPackageById = async (req, res) => {
 };
 
 export const createPackage = async (req, res) => {
+    const { from_address, to_address } = req.body;
+
+    const fromCoords = await geocodeAddress(from_address);
+    const toCoords = await geocodeAddress(to_address);
+
     try {
-        const pckg = await Package.create(req.body);
+        const pckg = await Package.create({ ...req.body, from_location: fromCoords, to_location: toCoords });
 
         res.status(HttpStatusCodes.CREATED).json(pckg);
     } catch (error) {
