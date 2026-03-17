@@ -15,6 +15,7 @@ const DriverMap = ({ from, to, current }) => {
 				zoom={7}
 				scrollWheelZoom={false}
 				className="h-full w-full"
+				style={{ height: '100%', width: '100%' }}
 			>
 				<TileLayer
 					attribution="&copy; OpenStreetMap"

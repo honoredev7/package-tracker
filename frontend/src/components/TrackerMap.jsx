@@ -29,10 +29,11 @@ const TrackerMap = ({ from, to, current }) => {
 				zoom={6}
 				scrollWheelZoom={false}
 				className="h-full w-full"
+				style={{ height: '100%', width: '100%' }}
 			>
 				<TileLayer
-				attribution="&copy; OpenStreetMap"
-				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					attribution="&copy; OpenStreetMap"
+					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 
 				{/* Source */}

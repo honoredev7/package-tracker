@@ -12,6 +12,11 @@ const DriverDashboard = () => {
 	const socketRef = useRef(null);
 	const intervalRef = useRef(null);
 
+	const isPickedUpEnabled = delivery?.status === "open";
+	const isInTransitEnabled = delivery?.status === "picked-up";
+	const isDeliveredEnabled = delivery?.status === "in_transit";
+	const isFailedEnabled = delivery?.status === "in_transit";
+
 	const loadDelivery = async () => {
 		try {
 			const deliveryRes = await api.get(`/api/delivery/${deliveryId}`, { withCredentials: true });
@@ -64,6 +69,41 @@ const DriverDashboard = () => {
 		}, 20000); // 20 seconds
 	};
 
+	const updateStatus = async (status) => {
+		try {
+			const res = await api.put(
+				`/api/delivery/${delivery._id}`,
+				{
+					...delivery,
+					status,
+				},
+				{ withCredentials: true }
+			);
+
+			setDelivery(res.data);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	const changeStatus = (status) => {
+		updateStatus(status);
+		if (!socketRef.current || socketRef.current.readyState !== 1) return;
+
+		socketRef.current.send(
+			JSON.stringify({
+				event: "status_changed",
+				delivery_id: delivery._id,
+				status: status,
+			})
+		);
+
+		setDelivery((prev) => ({
+			...prev,
+			status: status
+		}));
+	};
+
 	useEffect(() => {
 		if (delivery) {
 			startTracking();
@@ -100,6 +140,52 @@ const DriverDashboard = () => {
 						Load Delivery
 					</button>
 				</div>
+
+				{delivery && 
+					<div className="flex gap-4 flex-wrap">
+
+						<button
+							disabled={!isPickedUpEnabled}
+							onClick={() => changeStatus("picked-up")}
+							className={`px-4 py-2 rounded text-white ${
+								isPickedUpEnabled ? "bg-green-600 hover:bg-green-700" : "bg-gray-400"
+							}`}
+						>
+							Picked Up
+						</button>
+
+						<button
+							disabled={!isInTransitEnabled}
+							onClick={() => changeStatus("in_transit")}
+							className={`px-4 py-2 rounded text-white ${
+								isInTransitEnabled ? "bg-yellow-600 hover:bg-yellow-700" : "bg-gray-400"
+							}`}
+						>
+							In Transit
+						</button>
+
+						<button
+							disabled={!isDeliveredEnabled}
+							onClick={() => changeStatus("delivered")}
+							className={`px-4 py-2 rounded text-white ${
+								isDeliveredEnabled ? "bg-green-600 hover:bg-green-700" : "bg-gray-400"
+							}`}
+						>
+							Delivered
+						</button>
+
+						<button
+							disabled={!isFailedEnabled}
+							onClick={() => changeStatus("failed")}
+							className={`px-4 py-2 rounded text-white ${
+								isFailedEnabled ? "bg-red-600 hover:bg-red-700" : "bg-gray-400"
+							}`}
+						>
+							Failed
+						</button>
+
+					</div>
+				}
 
 				{delivery && pkg && (
 					<>
