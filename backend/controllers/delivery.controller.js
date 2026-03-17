@@ -25,8 +25,16 @@ export const getDeliveryById = async (req, res) => {
 };
 
 export const createDelivery = async (req, res) => {
+    const data = {
+        ...req.body,
+        pickup_time: null,
+        start_time: null,
+        end_time: null,
+        location: { lat: null, lng: null },
+    }
+    
     try {
-        const delivery = await Delivery.create(req.body);
+        const delivery = await Delivery.create(data);
 
         res.status(HttpStatusCodes.CREATED).json(delivery);
     } catch (error) {

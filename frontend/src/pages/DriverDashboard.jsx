@@ -135,7 +135,7 @@ const DriverDashboard = () => {
 
 					<button
 						onClick={loadDelivery}
-						className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+						className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition cursor-pointer"
 					>
 						Load Delivery
 					</button>
@@ -147,7 +147,7 @@ const DriverDashboard = () => {
 						<button
 							disabled={!isPickedUpEnabled}
 							onClick={() => changeStatus("picked-up")}
-							className={`px-4 py-2 rounded text-white ${
+							className={`px-4 py-2 rounded text-white cursor-pointer ${
 								isPickedUpEnabled ? "bg-green-600 hover:bg-green-700" : "bg-gray-400"
 							}`}
 						>
@@ -157,7 +157,7 @@ const DriverDashboard = () => {
 						<button
 							disabled={!isInTransitEnabled}
 							onClick={() => changeStatus("in_transit")}
-							className={`px-4 py-2 rounded text-white ${
+							className={`px-4 py-2 rounded text-white cursor-pointer ${
 								isInTransitEnabled ? "bg-yellow-600 hover:bg-yellow-700" : "bg-gray-400"
 							}`}
 						>
@@ -167,7 +167,7 @@ const DriverDashboard = () => {
 						<button
 							disabled={!isDeliveredEnabled}
 							onClick={() => changeStatus("delivered")}
-							className={`px-4 py-2 rounded text-white ${
+							className={`px-4 py-2 rounded text-white cursor-pointer ${
 								isDeliveredEnabled ? "bg-green-600 hover:bg-green-700" : "bg-gray-400"
 							}`}
 						>
@@ -177,7 +177,7 @@ const DriverDashboard = () => {
 						<button
 							disabled={!isFailedEnabled}
 							onClick={() => changeStatus("failed")}
-							className={`px-4 py-2 rounded text-white ${
+							className={`px-4 py-2 rounded text-white cursor-pointer ${
 								isFailedEnabled ? "bg-red-600 hover:bg-red-700" : "bg-gray-400"
 							}`}
 						>
